@@ -3,7 +3,7 @@ import React from 'react'
 import ChatItem from './ChatItem'
 import { router } from 'expo-router'
 
-export default function ChatList({ users }) {
+export default function ChatList({ users, currentUser }) {
   return (
     <View className="flex-1 px-2">
       <FlatList
@@ -17,6 +17,7 @@ export default function ChatList({ users }) {
             index={index}
             noBorder={index + 1 == users.length}
             router={router}
+            currentUser={currentUser}
           />
         )}
       />

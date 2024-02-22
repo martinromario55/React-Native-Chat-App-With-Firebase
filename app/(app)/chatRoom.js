@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, Keyboard } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { router, useLocalSearchParams } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
@@ -30,6 +30,7 @@ export default function ChatRoom() {
   const [messages, setMessages] = useState([])
   const textRef = useRef('')
   const inputRef = useRef(null)
+  const scrollViewRef = useRef(null)
 
   // console.log('got items data:', item)
 
@@ -49,8 +50,26 @@ export default function ChatRoom() {
       setMessages([...allMessages])
     })
 
-    return unsub
+    const KeyboardDidShowListner = Keyboard.addListener(
+      'keyboardDidShow',
+      updateScrollView
+    )
+
+    return () => {
+      unsub()
+      KeyboardDidShowListner.remove()
+    }
   }, [])
+
+  useEffect(() => {
+    updateScrollView()
+  }, [messages])
+
+  const updateScrollView = () => {
+    setTimeout(() => {
+      scrollViewRef?.current?.scrollToEnd({ animated: true })
+    }, 100)
+  }
 
   const createRoomIfNotExists = async () => {
     // roomId
@@ -96,7 +115,11 @@ export default function ChatRoom() {
 
         <View className="flex-1 justify-betwee overflow-visible">
           <View className="flex-1">
-            <MessageList messages={messages} currentUser={user} />
+            <MessageList
+              scrollViewRef={scrollViewRef}
+              messages={messages}
+              currentUser={user}
+            />
           </View>
         </View>
 

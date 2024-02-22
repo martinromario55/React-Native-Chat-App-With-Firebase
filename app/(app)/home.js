@@ -12,11 +12,10 @@ import { getDocs, query, where } from 'firebase/firestore'
 import { userRef } from '../../firebaseConfig'
 
 export default function Home() {
-  const { logout, user } = useAuth()
+  const { user } = useAuth()
   const [users, setUsers] = useState([])
 
   useEffect(() => {
-    
     if (user?.uid) getusers()
   }, [])
 
@@ -40,7 +39,7 @@ export default function Home() {
       <StatusBar style="light" />
 
       {users.length > 0 ? (
-        <ChatList users={users} />
+        <ChatList currentUser={user} users={users} />
       ) : (
         <View className="flex items-center" style={{ top: hp(30) }}>
           <ActivityIndicator size="large" />
