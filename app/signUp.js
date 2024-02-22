@@ -19,7 +19,9 @@ export default function SignUp() {
   const profileRef = useRef('')
   const { register } = useAuth()
   const [loading, setLoading] = useState(false)
+  // https://rb.gy/pvrurs
   // https://rb.gy/dfpop5
+  // https://rb.gy/pr08ha
 
   const handleRegister = async () => {
     // Empty values
