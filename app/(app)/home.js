@@ -9,9 +9,9 @@ export default function Home() {
     await logout()
   }
 
-  console.log('user data:', user)
+  // console.log('user data:', user)
   return (
-    <View>
+    <View className="flex-1 bg-white">
       <Text>Home</Text>
 
       <Button title="Sign Out" onPress={handleLogout} />

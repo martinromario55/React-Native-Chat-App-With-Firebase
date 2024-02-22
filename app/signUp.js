@@ -16,9 +16,10 @@ export default function SignUp() {
   const emailRef = useRef('')
   const passwordRef = useRef('')
   const usernameRef = useRef('')
-  const profileRef = useRef('https://rb.gy/pr08ha')
+  const profileRef = useRef('')
   const { register } = useAuth()
   const [loading, setLoading] = useState(false)
+  // https://rb.gy/dfpop5
 
   const handleRegister = async () => {
     // Empty values
@@ -40,20 +41,7 @@ export default function SignUp() {
       profileRef.current
     )
     setLoading(false)
-    if (response.success) {
-      Alert.alert(
-        'Sign Up',
-        'Your account has been created! Please login to continue.',
-        [
-          {
-            text: 'Login',
-            onPress: () => {
-              router.push('signIn')
-            },
-          },
-        ]
-      )
-    } else {
+    if (!response.success) {
       Alert.alert('Sign Up', response.msg)
     }
   }
