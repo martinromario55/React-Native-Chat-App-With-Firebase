@@ -7,15 +7,7 @@ import {
 import { Image } from 'expo-image'
 import { blurhash, formatDate } from '../constants/Common'
 import { getRoomId } from '../constants/Common'
-import {
-  Timestamp,
-  collection,
-  doc,
-  onSnapshot,
-  orderBy,
-  query,
-  setDoc,
-} from 'firebase/firestore'
+import { collection, doc, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from '../firebaseConfig'
 
 export default function ChatItem({

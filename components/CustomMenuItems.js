@@ -1,11 +1,6 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import {
-  Menu,
-  MenuOptions,
-  MenuOption,
-  MenuTrigger,
-} from 'react-native-popup-menu'
+import { MenuOption } from 'react-native-popup-menu'
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,

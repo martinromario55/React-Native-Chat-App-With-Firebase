@@ -7,7 +7,6 @@ import {
 } from 'react-native-responsive-screen'
 import { StatusBar } from 'expo-status-bar'
 import ChatList from '../../components/ChatList'
-import Loading from '../../components/Loading'
 import { getDocs, query, where } from 'firebase/firestore'
 import { userRef } from '../../firebaseConfig'
 
@@ -43,7 +42,6 @@ export default function Home() {
       ) : (
         <View className="flex items-center" style={{ top: hp(30) }}>
           <ActivityIndicator size="large" />
-          {/* <Loading size={hp(10)} /> */}
         </View>
       )}
     </View>

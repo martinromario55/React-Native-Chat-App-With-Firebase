@@ -8,12 +8,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Image } from 'expo-image'
 import { blurhash } from '../constants/Common'
 import { useAuth } from '../context/authContext'
-import {
-  Menu,
-  MenuOptions,
-  MenuOption,
-  MenuTrigger,
-} from 'react-native-popup-menu'
+import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu'
 import CustomMenuItems from './CustomMenuItems'
 import { AntDesign, Feather } from '@expo/vector-icons'
 
