@@ -10,10 +10,12 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { router } from 'expo-router'
 import Loading from '../components/Loading'
 import CustomKeyboardView from '../components/CustomKeyboardView'
+import { useAuth } from '../context/authContext'
 
 export default function SignIn() {
   const emailRef = useRef('')
   const passwordRef = useRef('')
+  const { login } = useAuth()
   const [loading, setLoading] = useState(false)
 
   const handleLogin = async () => {
@@ -23,6 +25,17 @@ export default function SignIn() {
       return
     }
     // login process
+    try {
+      setLoading(true)
+      const response = await login(emailRef.current, passwordRef.current)
+      setLoading(false)
+      if (!response.success) {
+        Alert.alert('Sign In', response.msg)
+      }
+    } catch (error) {
+      Alert.alert('Sign In', error.message)
+    }
+    setLoading(false)
   }
 
   return (

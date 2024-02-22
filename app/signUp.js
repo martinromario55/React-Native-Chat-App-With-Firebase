@@ -10,12 +10,14 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { router } from 'expo-router'
 import Loading from '../components/Loading'
 import CustomKeyboardView from '../components/CustomKeyboardView'
+import { useAuth } from '../context/authContext'
 
 export default function SignUp() {
   const emailRef = useRef('')
   const passwordRef = useRef('')
   const usernameRef = useRef('')
-  const profileRef = useRef('')
+  const profileRef = useRef('https://rb.gy/pr08ha')
+  const { register } = useAuth()
   const [loading, setLoading] = useState(false)
 
   const handleRegister = async () => {
@@ -30,6 +32,30 @@ export default function SignUp() {
       return
     }
     // register process
+    setLoading(true)
+    const response = await register(
+      emailRef.current,
+      passwordRef.current,
+      usernameRef.current,
+      profileRef.current
+    )
+    setLoading(false)
+    if (response.success) {
+      Alert.alert(
+        'Sign Up',
+        'Your account has been created! Please login to continue.',
+        [
+          {
+            text: 'Login',
+            onPress: () => {
+              router.push('signIn')
+            },
+          },
+        ]
+      )
+    } else {
+      Alert.alert('Sign Up', response.msg)
+    }
   }
 
   return (
